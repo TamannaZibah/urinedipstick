@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lamar Institute of Technology | Urinalysis & Dipstick Clinical Module (ADA Compliant)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+    :root {
+      --lit-red: #8B0000;
+      --lit-red-dark: #660000;
+      --lit-navy: #0c1f38;
+      --lit-gold: #b38600;
+      --focus-blue: #0056b3;
+      --text-dark: #1a1a1a;
+      --bg-slate: #f8fafc;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background-color: var(--bg-slate);
+    }
+
+    .font-mono-accessible {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .font-certificate {
+      font-family: 'Cinzel', Georgia, serif;
+    }
+
+    /* WCAG 2.1 AA Compliant Keyboard Focus */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 3px solid var(--focus-blue) !important;
+      outline-offset: 3px !important;
+      box-shadow: 0 0 0 5px rgba(0, 86, 179, 0.25) !important;
+    }
+
+    /* Skip Link for Screen Readers & Keyboard Nav */
+    .skip-to-content {
+      position: absolute;
+      top: -60px;
+      left: 10px;
+      background: #000000;
+      color: #ffffff;
+      padding: 12px 20px;
+      z-index: 100;
+      font-weight: 700;
+      text-decoration: underline;
+      border-radius: 4px;
+      transition: top 0.2s ease;
+    }
+    .skip-to-content:focus {
+      top: 10px;
+    }
+
+    /* High-contrast Reagent Strip */
+    .reagent-strip-stick {
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Print styles for certificate */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printable-certificate, #printable-certificate * {
+        visibility: visible;
+      }
+      #printable-certificate {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 24px;
+        border: 8px double #b38600 !important;
+        background: #ffffff !important;
+        box-shadow: none !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="skip-to-content">Skip to Main Content (Press Enter)</a>
+
+  <!-- ARIA Live Region for Screen Reader Announcements -->
+  <div id="sr-announcements" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- TOP HEADER / LIT BRANDED APP BAR -->
+  <header class="bg-[#0c1f38] text-white shadow-md border-b-4 border-[#8B0000]" role="banner">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      
+      <!-- Brand & Title -->
+      <div class="flex items-center space-x-3.5">
+        <div class="w-12 h-12 rounded-lg bg-[#8B0000] border-2 border-amber-300 flex items-center justify-center text-white text-2xl shadow" aria-hidden="true">
+          <i class="fa-solid fa-vial-circle-check"></i>
+        </div>
+        <div>
+          <span class="text-xs uppercase font-extrabold tracking-wider text-amber-300 block">
+            Lamar Institute of Technology • Allied Health & Science
+          </span>
+          <h1 class="text-lg sm:text-xl font-bold tracking-tight text-white">
+            Urinalysis & Dipstick Mastery <span class="text-slate-300 font-normal text-sm sm:text-base">| MA Clinical Lab Skills</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Utilities: Audio & Quick Info -->
+      <div class="flex items-center flex-wrap gap-2 sm:gap-3">
+        <!-- Audio Assistance Toggle -->
+        <button id="audio-toggle-btn" onclick="toggleAudio()" class="px-3.5 py-2 rounded-md bg-slate-800 hover:bg-slate-700 text-white text-xs sm:text-sm font-semibold border border-slate-600 flex items-center gap-2 transition" aria-label="Toggle Audio Sound Effects">
+          <i class="fa-solid fa-volume-high text-amber-300" id="audio-icon" aria-hidden="true"></i>
+          <span id="audio-status-text">Audio: ON</span>
+        </button>
+
+        <!-- Exam Badge Indicator -->
+        <div class="bg-black/30 border border-slate-600 px-3 py-1.5 rounded-md text-xs sm:text-sm font-medium flex items-center gap-2">
+          <span class="text-slate-300">AAMA Exam:</span>
+          <span id="header-score-badge" class="font-bold text-amber-300">Not Tested</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN ACCESSIBLE NAVIGATION TABS -->
+    <nav class="bg-[#122847] border-t border-slate-700/80" aria-label="Urinalysis Learning Sections">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="flex space-x-1 sm:space-x-2 overflow-x-auto py-2 text-sm" role="tablist">
+          <button role="tab" aria-selected="true" aria-controls="tab-guide" onclick="switchTab('tab-guide')" id="btn-tab-guide" class="tab-link px-4 py-2 rounded font-bold bg-[#8B0000] text-white shadow border border-red-700 whitespace-nowrap">
+            <i class="fa-solid fa-book-open mr-1.5" aria-hidden="true"></i> 1. Urinalysis Guide
+          </button>
+          <button role="tab" aria-selected="false" aria-controls="tab-lab" onclick="switchTab('tab-lab')" id="btn-tab-lab" class="tab-link px-4 py-2 rounded font-semibold text-slate-200 hover:text-white hover:bg-slate-800 whitespace-nowrap">
+            <i class="fa-solid fa-flask-vial mr-1.5" aria-hidden="true"></i> 2. Virtual Dipstick Lab
+          </button>
+          <button role="tab" aria-selected="false" aria-controls="tab-poc" onclick="switchTab('tab-poc')" id="btn-tab-poc" class="tab-link px-4 py-2 rounded font-semibold text-slate-200 hover:text-white hover:bg-slate-800 whitespace-nowrap">
+            <i class="fa-solid fa-vial mr-1.5" aria-hidden="true"></i> 3. Point-of-Care (hCG & UDS)
+          </button>
+          <button role="tab" aria-selected="false" aria-controls="tab-exam" onclick="switchTab('tab-exam')" id="btn-tab-exam" class="tab-link px-4 py-2 rounded font-semibold text-slate-200 hover:text-white hover:bg-slate-800 whitespace-nowrap">
+            <i class="fa-solid fa-graduation-cap mr-1.5" aria-hidden="true"></i> 4. Certification Exam
+          </button>
+          <button role="tab" aria-selected="false" aria-controls="tab-certificate" onclick="switchTab('tab-certificate')" id="btn-tab-certificate" class="tab-link px-4 py-2 rounded font-semibold text-slate-200 hover:text-white hover:bg-slate-800 whitespace-nowrap">
+            <i class="fa-solid fa-certificate mr-1.5" aria-hidden="true"></i> 5. Verified Certificate
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MAIN ACCESSIBLE CONTENT AREA -->
+  <main id="main-content" class="max-w-6xl mx-auto px-4 sm:px-6 py-6 flex-grow w-full space-y-8" role="main">
+
+    <!-- ======================================================== -->
+    <!-- TAB 1: PLAIN LANGUAGE URINALYSIS GUIDE -->
+    <!-- ======================================================== -->
+    <section id="tab-guide" class="tab-pane space-y-6" role="tabpanel" aria-labelledby="btn-tab-guide">
+      
+      <!-- Welcome Callout -->
+      <div class="bg-white rounded-xl shadow-sm border border-slate-300 p-6 md:p-8">
+        <div class="max-w-3xl space-y-3">
+          <span class="inline-block px-3 py-1 bg-red-100 text-[#8B0000] font-extrabold text-xs rounded-full uppercase tracking-wider">
+            CLIA-Waived In-Office Competency
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0c1f38]">
+            Urinalysis Fundamentals for Medical Assistants
+          </h2>
+          <p class="text-slate-700 text-base leading-relaxed">
+            Urinalysis (UA) is a routine laboratory test performed in outpatient clinics and hospitals to screen for urinary tract infections (UTIs), kidney disease, and diabetes. As a Medical Assistant, you will conduct the <strong>Physical Examination</strong> and the <strong>Chemical 10-Parameter Dipstick Examination</strong>.
+          </p>
+        </div>
+
+        <!-- 3 Core Golden Rules (Accessible Cards) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+          <div class="bg-slate-50 border-l-4 border-[#8B0000] p-4 rounded-r-lg">
+            <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <i class="fa-solid fa-clock text-[#8B0000]" aria-hidden="true"></i> The 1-Hour Rule
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-700 mt-1">
+              Test urine within <strong>1 hour</strong> of collection. If delayed, refrigerate at 2°C to 8°C (36°F–46°F) for up to 4 hours.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 border-l-4 border-amber-600 p-4 rounded-r-lg">
+            <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <i class="fa-solid fa-temperature-arrow-up text-amber-700" aria-hidden="true"></i> Warm to Room Temp
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-700 mt-1">
+              Refrigerated urine <strong>must return to room temperature</strong> (15–30 min) before dipping. Cold urine slows reagent pad chemical reactions.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 border-l-4 border-emerald-600 p-4 rounded-r-lg">
+            <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <i class="fa-solid fa-shield-virus text-emerald-700" aria-hidden="true"></i> Required PPE
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-700 mt-1">
+              Always wear clean gloves, lab coat/gown, and safety goggles or face shield whenever handling unpreserved body fluids.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Equipment Checklist & QC Standards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Equipment Card -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-300 p-6 space-y-4">
+          <h3 class="text-lg font-bold text-[#0c1f38] border-b pb-2 flex items-center gap-2">
+            <i class="fa-solid fa-toolbox text-[#8B0000]" aria-hidden="true"></i> Standard Office Urinalysis Supplies
+          </h3>
+          <ul class="space-y-2.5 text-sm text-slate-800">
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-check text-emerald-600 mt-1" aria-hidden="true"></i>
+              <span><strong>Multistix 10SG Reagent Strips:</strong> Kept in original bottle with desiccant cap tightly closed to block moisture.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-check text-emerald-600 mt-1" aria-hidden="true"></i>
+              <span><strong>Clean Absorbent Paper Towel:</strong> For tapping the side edge of the dipped strip to remove excess runoff urine.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-check text-emerald-600 mt-1" aria-hidden="true"></i>
+              <span><strong>Timer or Watch with Second Hand:</strong> Crucial for recording pads at exact 30, 40, 45, 60, and 120-second marks.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-check text-emerald-600 mt-1" aria-hidden="true"></i>
+              <span><strong>Color Reference Comparator Chart:</strong> Stamped on the bottle or automated analyzer (Clinitek).</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-check text-emerald-600 mt-1" aria-hidden="true"></i>
+              <span><strong>Biohazard Waste Container:</strong> For safe disposal of used test strips, cups, and gloves.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Quality Control (QC) Card -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-300 p-6 space-y-4">
+          <h3 class="text-lg font-bold text-[#0c1f38] border-b pb-2 flex items-center gap-2">
+            <i class="fa-solid fa-clipboard-check text-amber-600" aria-hidden="true"></i> Daily Quality Control (QC) Rules
+          </h3>
+          <p class="text-sm text-slate-700">
+            To ensure patient safety under CLIA-waived regulations, the Medical Assistant must verify test strip accuracy using manufactured control solutions:
+          </p>
+          <div class="bg-amber-50 p-4 rounded-lg border border-amber-300 text-sm space-y-2 text-slate-900">
+            <p><strong>1. Level 1 (Negative Control):</strong> Must yield all negative/normal results.</p>
+            <p><strong>2. Level 2 (Positive Control):</strong> Must produce expected positive color reactions.</p>
+            <p><strong>When to run QC:</strong> At the start of each testing day, whenever opening a new bottle lot number, and if results appear questionable.</p>
+            <p class="text-xs text-amber-900 font-bold mt-2">
+              <i class="fa-solid fa-circle-exclamation mr-1" aria-hidden="true"></i> Never report patient results if QC results fail or are expired!
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 10 Parameters Timing Reference Table (High-contrast, screen-reader table) -->
+      <div class="bg-white rounded-xl shadow-sm border border-slate-300 p-6 space-y-4">
+        <div>
+          <h3 class="text-lg font-bold text-[#0c1f38] flex items-center gap-2">
+            <i class="fa-solid fa-stopwatch text-[#8B0000]" aria-hidden="true"></i> The 10 Reagent Parameters & Standard Read Times
+          </h3>
+          <p class="text-sm text-slate-600">
+            Pads must be read at specified time intervals. Reading prematurely or past the time limit causes false positives or false negatives.
+          </p>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm border-collapse border border-slate-300">
+            <caption class="sr-only">Chemical Urinalysis Reagents, Read Times, and Clinical Meanings</caption>
+            <thead class="bg-[#0c1f38] text-white">
+              <tr>
+                <th scope="col" class="p-3 border border-slate-400 font-bold">Standard Read Time</th>
+                <th scope="col" class="p-3 border border-slate-400 font-bold">Parameter</th>
+                <th scope="col" class="p-3 border border-slate-400 font-bold">Normal Finding</th>
+                <th scope="col" class="p-3 border border-slate-400 font-bold">Clinical Significance / When Elevated</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              <tr class="bg-slate-50">
+                <td class="p-3 font-mono-accessible font-bold text-red-800 border border-slate-300">30 seconds</td>
+                <td class="p-3 font-semibold border border-slate-300">Glucose (GLU)</td>
+                <td class="p-3 border border-slate-300">Negative</td>
+                <td class="p-3 border border-slate-300">Diabetes Mellitus (renal threshold exceeded &gt;180 mg/dL).</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-mono-accessible font-bold text-red-800 border border-slate-300">30 seconds</td>
+                <td class="p-3 font-semibold border border-slate-300">Bilirubin (BIL)</td>
+                <td class="p-3 border border-slate-300">Negative</td>
+                <td class="p-3 border border-slate-300">Liver damage, hepatitis, or biliary duct obstruction.</td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="p-3 font-mono-accessible font-bold text-red-800 border border-slate-300">40 seconds</td>
+                <td class="p-3 font-semibold border border-slate-300">Ketones (KET)</td>
+                <td class="p-3 border border-slate-300">Negative</td>
+                <td class="p-3 border border-slate-300">Fat metabolism: Diabetic Ketoacidosis (DKA), starvation, vomiting.</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-mono-accessible font-bold text-red-800 border border-slate-300">45 seconds</td>
+                <td class="p-3 font-semibold border border-slate-300">Specific Gravity (SG)</td>
+                <td class="p-3 border border-slate-300">1.005 – 1.030</td>
+                <td class="p-3 border border-slate-300">Kidney concentration: &lt;1.005 (overhydrated), &gt;1.030 (dehydrated).</td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="p-3 font-mono-accessible font-bold text-blue-900 border border-slate-300">60 seconds</td>
+                <td class="p-3 font-semibold border border-slate-300">Blood / Hemoglobin (BLO)</td>
+                <td class="p-3 border border-slate-300">Negative</td>
+                <td class="p-3 border border-slate-300">Kidney stones, infection, trauma, menses, or glomerulonephritis.</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-mono-accessible font-bold text-blue-900 border border-slate-300">60 seconds</td>
+                <td class="p-3 font-semibold border border-slate-300">pH</td>
+                <td class="p-3 border border-slate-300">4.5 – 8.0 (avg 6.0)</td>
+                <td class="p-3 border border-slate-300">Acid-base status. Alkaline urine may indicate old sample or Proteus UTI.</td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="p-3 font-mono-accessible font-bold text-blue-900 border border-slate-300">60 seconds</td>
+                <td class="p-3 font-semibold border border-slate-300">Protein / Albumin (PRO)</td>
+                <td class="p-3 border border-slate-300">Negative or Trace</td>
+                <td class="p-3 border border-slate-300">Early marker for renal disease, preeclampsia in pregnancy, or fever.</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-mono-accessible font-bold text-blue-900 border border-slate-300">60 seconds</td>
+                <td class="p-3 font-semibold border border-slate-300">Urobilinogen (URO)</td>
+                <td class="p-3 border border-slate-300">0.2 – 1.0 mg/dL</td>
+                <td class="p-3 border border-slate-300">Elevated in liver disease or hemolytic anemias.</td>
+              </tr>
+              <tr class="bg-slate-50">
+                <td class="p-3 font-mono-accessible font-bold text-blue-900 border border-slate-300">60 seconds</td>
+                <td class="p-3 font-semibold border border-slate-300">Nitrite (NIT)</td>
+                <td class="p-3 border border-slate-300">Negative</td>
+                <td class="p-3 border border-slate-300">Gram-negative bacteria (e.g., E. coli) converting nitrate to nitrite (UTI).</td>
+              </tr>
+              <tr class="bg-emerald-50">
+                <td class="p-3 font-mono-accessible font-bold text-emerald-800 border border-slate-300">120 seconds (2 min)</td>
+                <td class="p-3 font-semibold border border-slate-300">Leukocytes (LEU)</td>
+                <td class="p-3 border border-slate-300">Negative</td>
+                <td class="p-3 border border-slate-300">Presence of white blood cells (pyuria) indicating urinary tract infection.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- TAB 2: VIRTUAL DIPSTICK PRACTICE WORKBENCH -->
+    <!-- ======================================================== -->
+    <section id="tab-lab" class="tab-pane hidden space-y-6" role="tabpanel" aria-labelledby="btn-tab-lab">
+      
+      <!-- Instructions & Case Selector -->
+      <div class="bg-white rounded-xl shadow-sm border border-slate-300 p-6 space-y-4">
+        <h2 class="text-xl sm:text-2xl font-bold text-[#0c1f38] flex items-center gap-2">
+          <i class="fa-solid fa-flask-vial text-[#8B0000]" aria-hidden="true"></i> Virtual Dipstick Procedure Workbench
+        </h2>
+        <p class="text-sm text-slate-700">
+          Select a patient clinical scenario, observe the physical urine sample, execute the procedural dip-and-tap technique, and observe color changes at their standard incubation times.
+        </p>
+
+        <!-- Scenario Selector Accessible Dropdown -->
+        <div class="bg-slate-100 p-4 rounded-lg border border-slate-300">
+          <label for="lab-case-select" class="block font-bold text-sm text-slate-900 mb-1.5">
+            Choose Patient Scenario to Test:
+          </label>
+          <select id="lab-case-select" onchange="loadLabCase()" class="w-full sm:w-auto bg-white border-2 border-slate-400 rounded-md p-2 text-sm font-semibold text-slate-900 focus:border-[#0056b3]">
+            <option value="case-uti">Patient Case 1: 34yo Female with Burning on Urination (Suspected UTI)</option>
+            <option value="case-dka">Patient Case 2: 19yo Male with Extreme Thirst & Fruity Breath (Suspected DKA)</option>
+            <option value="case-normal">Patient Case 3: 28yo Female Routine Well-Woman Physical (Normal / WNL)</option>
+            <option value="case-renal">Patient Case 4: 56yo Male with Flank Pain & Pink Urine (Renal Calculi)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Laboratory Simulation Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Left: Interactive Specimen & Procedural Buttons (7 cols) -->
+        <div class="lg:col-span-7 bg-white rounded-xl shadow-sm border border-slate-300 p-6 space-y-6">
+          
+          <div class="border-b border-slate-200 pb-2">
+            <h3 class="font-bold text-[#0c1f38] text-base">Step 1 & 2: Physical Inspection & Chemical Dip</h3>
+          </div>
+
+          <!-- Physical Specimen Card with accessible text -->
+          <div class="bg-slate-50 border border-slate-300 rounded-lg p-4 flex flex-col sm:flex-row items-center gap-6">
+            <!-- Accessible Urine Cup graphic -->
+            <div class="flex flex-col items-center">
+              <div class="w-20 h-28 border-4 border-slate-400 rounded-b-2xl bg-white relative overflow-hidden flex flex-col justify-end shadow-inner" aria-label="Urine Specimen Container" role="img">
+                <div id="urine-visual-fill" class="w-full h-20 transition-all duration-500 bg-[#e3bf5b]"></div>
+              </div>
+              <span class="text-xs font-bold text-slate-600 mt-2">Specimen Cup</span>
+            </div>
+
+            <!-- Plain Language Physical Readings -->
+            <div class="space-y-1.5 text-sm w-full">
+              <p><strong>Chief Complaint:</strong> <span id="case-cc" class="text-slate-800">Dysuria, frequency, and pelvic pain for 2 days.</span></p>
+              <p><strong>Visual Color:</strong> <span id="case-color" class="font-semibold text-slate-900">Cloudy Yellow</span></p>
+              <p><strong>Clarity:</strong> <span id="case-clarity" class="font-semibold text-slate-900">Cloudy / Turbid</span></p>
+              <p><strong>Odor:</strong> <span id="case-odor" class="font-semibold text-slate-900">Foul / Ammonia</span></p>
+              <p><strong>Temperature:</strong> <span class="font-semibold text-emerald-800">22.0°C (Room Temp Equilibrated)</span></p>
+            </div>
+          </div>
+
+          <!-- Virtual Dipstick Strip -->
+          <div class="bg-slate-900 text-white rounded-lg p-5 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-700 pb-3">
+              <div class="text-sm font-mono-accessible text-amber-300 flex items-center gap-2">
+                <i class="fa-solid fa-stopwatch" aria-hidden="true"></i> 
+                <span>Timer: <strong id="lab-timer-display" class="text-white text-base">00:00</strong></span>
+              </div>
+              <div id="lab-timer-announcer" class="text-xs font-bold px-2.5 py-1 rounded bg-slate-800 text-slate-200 border border-slate-700">
+                Ready to begin test
+              </div>
+            </div>
+
+            <!-- The 10 Pads Representation -->
+            <div class="overflow-x-auto py-2">
+              <div class="min-w-[480px] p-2 bg-slate-800 rounded flex items-center justify-center">
+                <div id="visual-strip" class="reagent-strip-stick rounded-full py-1.5 px-3 flex items-center space-x-2" role="region" aria-label="10-Parameter Reagent Test Strip">
+                  <div class="w-14 h-5 bg-slate-300 rounded text-[10px] text-slate-700 font-bold flex items-center justify-center select-none" aria-hidden="true">
+                    HANDLE
+                  </div>
+
+                  <!-- 10 Color Pads -->
+                  <div class="flex items-center space-x-2 text-center" id="pads-bar">
+                    <div>
+                      <div id="pad-leu-box" class="w-5 h-5 rounded-sm border border-slate-400 bg-[#faf4db]" title="Leukocytes"></div>
+                      <span class="text-[9px] font-bold text-slate-900 block mt-1">LEU</span>
+                    </div>
+                    <div>
+                      <div id="pad-nit-box" class="w-5 h-5 rounded-sm border border-slate-400 bg-[#ffffff]" title="Nitrite"></div>
+                      <span class="text-[9px] font-bold text-slate-900 block mt-1">NIT</span>
+                    </div>
+                    <div>
+                      <div id="pad-uro-box" class="w-5 h-5 rounded-sm border border-slate-400 bg-[#fde3ca]" title="Urobilinogen"></div>
+                      <span class="text-[9px] font-bold text-slate-900 block mt-1">URO</span>
+                    </div>
+                    <div>
+                      <div id="pad-pro-box" class="w-5 h-5 rounded-sm border border-slate-400 bg-[#d8e8b2]" title="Protein"></div>
+                      <span class="text-[9px] font-bold text-slate-900 block mt-1">PRO</span>
+                    </div>
+                    <div>
+                      <div id="pad-ph-box" class="w-5 h-5 rounded-sm border border-slate-400 bg-[#d4a843]" title="pH"></div>
+                      <span class="text-[9px] font-bold text-slate-900 block mt-1">pH</span>
+                    </div>
+                    <div>
+                      <div id="pad-blo-box" class="w-5 h-5 rounded-sm border border-slate-400 bg-[#d8af2c]" title="Blood"></div>
+                      <span class="text-[9px] font-bold text-slate-900 block mt-1">BLO</span>
+                    </div>
+                    <div>
+                      <div id="pad-sg-box" class="w-5 h-5 rounded-sm border border-slate-400 bg-[#2b6d5e]" title="Specific Gravity"></div>
+                      <span class="text-[9px] font-bold text-slate-900 block mt-1">SG</span>
+                    </div>
+                    <div>
+                      <div id="pad-ket-box" class="w-5 h-5 rounded-sm border border-slate-400 bg-[#cfb59b]" title="Ketones"></div>
+                      <span class="text-[9px] font-bold text-slate-900 block mt-1">KET</span>
+                    </div>
+                    <div>
+                      <div id="pad-bil-box" class="w-5 h-5 rounded-sm border border-slate-400 bg-[#f2e6cb]" title="Bilirubin"></div>
+                      <span class="text-[9px] font-bold text-slate-900 block mt-1">BIL</span>
+                    </div>
+                    <div>
+                      <div id="pad-glu-box" class="w-5 h-5 rounded-sm border border-slate-400 bg-[#84b5c7]" title="Glucose"></div>
+                      <span class="text-[9px] font-bold text-slate-900 block mt-1">GLU</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Accessible Action Buttons with Keyboard Support -->
+            <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+              <button id="btn-step-dip" onclick="executeDip()" class="px-4 py-2.5 bg-[#8B0000] hover:bg-red-800 text-white rounded-md font-bold text-xs sm:text-sm shadow flex items-center gap-2">
+                <i class="fa-solid fa-water" aria-hidden="true"></i> 1. Dip All Pads (1 Sec)
+              </button>
+              <button id="btn-step-tap" onclick="executeTap()" disabled class="px-4 py-2.5 bg-slate-700 text-slate-300 rounded-md font-bold text-xs sm:text-sm shadow cursor-not-allowed flex items-center gap-2">
+                <i class="fa-solid fa-hands-bubbles" aria-hidden="true"></i> 2. Tap Edge on Paper Towel
+              </button>
+              <button onclick="resetLab()" class="px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 rounded-md font-medium text-xs sm:text-sm flex items-center gap-1.5">
+                <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Plain-English Results Charting & Validation (5 cols) -->
+        <div class="lg:col-span-5 bg-white rounded-xl shadow-sm border border-slate-300 p-6 space-y-4">
+          <div class="border-b border-slate-200 pb-2">
+            <h3 class="font-bold text-[#0c1f38] text-base">Step 3: Document Findings in Medical Chart</h3>
+            <p class="text-xs text-slate-600">Select what you observed on the reagent strip pads:</p>
+          </div>
+
+          <form id="lab-chart-form" onsubmit="validateLabReport(event)" class="space-y-3 text-sm">
+            
+            <div class="space-y-1">
+              <label for="select-glu" class="block font-semibold text-xs text-slate-800">1. Glucose (Read at 30 seconds):</label>
+              <select id="select-glu" class="w-full bg-white border border-slate-300 rounded p-1.5 text-xs">
+                <option value="Negative">Negative / Normal (Light Teal)</option>
+                <option value="100 mg/dL">100 mg/dL (Trace / Olive)</option>
+                <option value="1000+ mg/dL">1000+ mg/dL (High / Dark Brown)</option>
+              </select>
+            </div>
+
+            <div class="space-y-1">
+              <label for="select-ket" class="block font-semibold text-xs text-slate-800">2. Ketones (Read at 40 seconds):</label>
+              <select id="select-ket" class="w-full bg-white border border-slate-300 rounded p-1.5 text-xs">
+                <option value="Negative">Negative (Buff Tan)</option>
+                <option value="Trace (5 mg)">Trace (Light Pinkish Tan)</option>
+                <option value="Large (80+ mg)">Large / 80+ mg (Deep Purple)</option>
+              </select>
+            </div>
+
+            <div class="space-y-1">
+              <label for="select-sg" class="block font-semibold text-xs text-slate-800">3. Specific Gravity (Read at 45 seconds):</label>
+              <select id="select-sg" class="w-full bg-white border border-slate-300 rounded p-1.5 text-xs">
+                <option value="1.005">1.005 (Very Dilute / Dark Blue-Green)</option>
+                <option value="1.015">1.015 (Normal / Green)</option>
+                <option value="1.025">1.025 (Concentrated / Olive)</option>
+                <option value="1.035+">1.035+ (High / Brownish Yellow)</option>
+              </select>
+            </div>
+
+            <div class="space-y-1">
+              <label for="select-blo" class="block font-semibold text-xs text-slate-800">4. Blood / Hemoglobin (Read at 60 seconds):</label>
+              <select id="select-blo" class="w-full bg-white border border-slate-300 rounded p-1.5 text-xs">
+                <option value="Negative">Negative (Orange)</option>
+                <option value="Trace">Trace (Speckled Green)</option>
+                <option value="Large">Large (Dark Solid Green)</option>
+              </select>
+            </div>
+
+            <div class="space-y-1">
+              <label for="select-pro" class="block font-semibold text-xs text-slate-800">5. Protein (Read at 60 seconds):</label>
+              <select id="select-pro" class="w-full bg-white border border-slate-300 rounded p-1.5 text-xs">
+                <option value="Negative">Negative (Yellow)</option>
+                <option value="Trace (15 mg)">Trace (Light Yellow-Green)</option>
+                <option value="1+ (30 mg)">1+ / 30 mg (Light Green)</option>
+              </select>
+            </div>
+
+            <div class="space-y-1">
+              <label for="select-nit" class="block font-semibold text-xs text-slate-800">6. Nitrite (Read at 60 seconds):</label>
+              <select id="select-nit" class="w-full bg-white border border-slate-300 rounded p-1.5 text-xs">
+                <option value="Negative">Negative (White)</option>
+                <option value="Positive">Positive (Pink / Indicates Gram-negative bacteria)</option>
+              </select>
+            </div>
+
+            <div class="space-y-1">
+              <label for="select-leu" class="block font-semibold text-xs text-slate-800">7. Leukocytes (Read at 120 seconds):</label>
+              <select id="select-leu" class="w-full bg-white border border-slate-300 rounded p-1.5 text-xs">
+                <option value="Negative">Negative (Light Tan)</option>
+                <option value="Trace">Trace (Slight Lavender)</option>
+                <option value="Large">Large / Positive (Deep Purple / Indicates Pyuria)</option>
+              </select>
+            </div>
+
+            <button type="submit" class="w-full mt-3 py-2.5 bg-[#0c1f38] hover:bg-[#122847] text-amber-300 font-bold rounded text-xs sm:text-sm border border-amber-300/40 shadow transition">
+              <i class="fa-solid fa-file-signature mr-1.5" aria-hidden="true"></i> Verify & Sign EMR Laboratory Chart
+            </button>
+          </form>
+
+          <!-- Accessible Outcome Alert Box -->
+          <div id="lab-feedback-box" class="hidden p-4 rounded-lg text-xs sm:text-sm" role="status"></div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- TAB 3: POC PREGNANCY & URINE DRUG SCREEN -->
+    <!-- ======================================================== -->
+    <section id="tab-poc" class="tab-pane hidden space-y-6" role="tabpanel" aria-labelledby="btn-tab-poc">
+      
+      <div class="bg-white rounded-xl shadow-sm border border-slate-300 p-6 md:p-8 space-y-6">
+        <div>
+          <h2 class="text-2xl font-bold text-[#0c1f38]">
+            Point-of-Care (POC) Clinical Urine Assays
+          </h2>
+          <p class="text-sm text-slate-700 mt-1">
+            Two common in-office qualitative urine tests performed by medical assistants: Rapid hCG pregnancy test and workplace Urine Drug Screen (UDS).
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- hCG Cassette Section -->
+          <div class="bg-slate-50 border border-slate-300 rounded-lg p-5 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+              <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                <i class="fa-solid fa-baby text-pink-600" aria-hidden="true"></i> Urine Pregnancy Test (hCG)
+              </h3>
+              <span class="text-xs bg-pink-100 text-pink-900 font-bold px-2 py-0.5 rounded">CLIA-Waived</span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-700">
+              Detects human chorionic gonadotropin (hCG) hormone. Preferred specimen is <strong>first-morning urine</strong> due to peak concentration.
+            </p>
+
+            <!-- Interactive Cassette Diagram -->
+            <div class="bg-white border-2 border-slate-300 rounded-xl p-4 flex items-center justify-around shadow-sm" role="region" aria-label="Simulated hCG Pregnancy Test Cassette">
+              <!-- Sample Well -->
+              <div class="text-center">
+                <div class="w-8 h-8 rounded-full bg-slate-100 border-2 border-slate-400 flex items-center justify-center font-bold text-xs text-slate-700">
+                  S
+                </div>
+                <span class="text-[10px] text-slate-500 font-semibold block mt-1">3 Drops</span>
+              </div>
+
+              <!-- Readout Window -->
+              <div class="bg-slate-100 border-2 border-slate-300 rounded-lg px-6 py-2.5 flex items-center space-x-6">
+                <div class="flex flex-col items-center">
+                  <div id="hcg-control-bar" class="w-1.5 h-8 bg-pink-600 rounded-full" aria-hidden="true"></div>
+                  <span class="text-[10px] font-bold text-slate-700 mt-1">C (Control)</span>
+                </div>
+                <div class="flex flex-col items-center">
+                  <div id="hcg-test-bar" class="w-1.5 h-8 bg-pink-600 rounded-full" aria-hidden="true"></div>
+                  <span class="text-[10px] font-bold text-slate-700 mt-1">T (Test)</span>
+                </div>
+              </div>
+
+              <div id="hcg-status-label" class="font-bold text-sm text-pink-800">
+                Positive (Pregnant)
+              </div>
+            </div>
+
+            <!-- Toggles for Accessible Learning -->
+            <div class="flex flex-wrap gap-2 text-xs">
+              <button onclick="setHcgVisual('pos')" class="px-3 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded font-semibold">View Positive</button>
+              <button onclick="setHcgVisual('neg')" class="px-3 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded font-semibold">View Negative</button>
+              <button onclick="setHcgVisual('inv')" class="px-3 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded font-semibold">View Invalid</button>
+            </div>
+
+            <div class="bg-yellow-50 border-l-4 border-yellow-600 p-3 text-xs text-slate-800">
+              <strong>Control Line Rule:</strong> If the Control (C) line is missing, the test is <strong>INVALID</strong> and must be retested with a fresh cassette.
+            </div>
+          </div>
+
+          <!-- UDS Chain of Custody Section -->
+          <div class="bg-slate-50 border border-slate-300 rounded-lg p-5 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+              <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+                <i class="fa-solid fa-clipboard-user text-blue-700" aria-hidden="true"></i> Urine Drug Screen (UDS) & Custody
+              </h3>
+              <span class="text-xs bg-blue-100 text-blue-900 font-bold px-2 py-0.5 rounded">Forensic Standard</span>
+            </div>
+
+            <div class="bg-red-50 border-2 border-red-300 p-3.5 rounded-lg text-xs sm:text-sm text-slate-900">
+              <strong class="font-bold text-red-900 block mb-1">
+                <i class="fa-solid fa-temperature-half text-red-700 mr-1" aria-hidden="true"></i> The 4-Minute Temperature Window:
+              </strong>
+              Check the temperature strip on the side of the collection cup within <strong>4 minutes</strong> of donation. 
+              Acceptable range: <strong>90°F to 100°F (32°C to 38°C)</strong>. Outside this range indicates potential dilution, substitution, or tampering.
+            </div>
+
+            <div class="space-y-1.5 text-xs sm:text-sm text-slate-800">
+              <h4 class="font-bold uppercase text-xs text-slate-700">Chain-of-Custody (CoC) Protocol:</h4>
+              <p>• Verify donor photo ID and have donor empty all pockets and remove bulky outerwear.</p>
+              <p>• Add bluing agent to toilet bowl and secure sink water faucets.</p>
+              <p>• Collect at least 30–45 mL of urine.</p>
+              <p>• Apply tamper-evident security seal over lid in donor's presence; both donor and MA sign and date form.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- TAB 4: AAMA CMA / RMA 10-QUESTION EXAM -->
+    <!-- ======================================================== -->
+    <section id="tab-exam" class="tab-pane hidden space-y-6" role="tabpanel" aria-labelledby="btn-tab-exam">
+      
+      <div class="bg-white rounded-xl shadow-sm border border-slate-300 p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs uppercase font-extrabold tracking-wider text-[#8B0000]">Certification Preparation</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-[#0c1f38]">
+            Urinalysis Certification Assessment (10 Questions)
+          </h2>
+          <p class="text-sm text-slate-600 mt-1">
+            Pass with <strong>80% or higher (8 out of 10)</strong> to unlock your verified Certificate of Clinical Competence.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-300 px-4 py-2 rounded-lg text-center font-bold">
+          <span class="text-xs text-slate-500 uppercase block">Current Score</span>
+          <span id="quiz-score-num" class="text-lg text-red-800 font-extrabold">0 / 10</span>
+        </div>
+      </div>
+
+      <!-- Accessible Exam Question Container -->
+      <form id="quiz-form" onsubmit="gradeQuiz(event)" class="space-y-4">
+        <div id="quiz-questions-list" class="space-y-4">
+          <!-- Dynamically populated via script -->
+        </div>
+
+        <!-- Submit & Reset Controls -->
+        <div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-300">
+          <button type="submit" class="w-full sm:w-auto px-6 py-3 bg-[#8B0000] hover:bg-red-800 text-white font-bold rounded-lg shadow text-sm transition">
+            <i class="fa-solid fa-check-double mr-1.5" aria-hidden="true"></i> Submit Exam for Official Grading
+          </button>
+          <button type="button" onclick="resetQuiz()" class="text-sm text-slate-600 hover:text-slate-900 underline font-medium">
+            Reset Answers
+          </button>
+        </div>
+      </form>
+
+      <!-- Grade Outcome Card -->
+      <div id="quiz-results-banner" class="hidden p-6 rounded-xl border-2 text-sm sm:text-base space-y-3" role="alert"></div>
+
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- TAB 5: CERTIFICATE OF COMPLETION -->
+    <!-- ======================================================== -->
+    <section id="tab-certificate" class="tab-pane hidden space-y-6" role="tabpanel" aria-labelledby="btn-tab-certificate">
+      
+      <!-- Locked State Alert -->
+      <div id="cert-locked-box" class="bg-white rounded-xl shadow-sm border border-slate-300 p-8 text-center space-y-4">
+        <div class="w-16 h-16 bg-red-100 text-red-800 rounded-full flex items-center justify-center mx-auto text-2xl" aria-hidden="true">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <h2 class="text-xl font-bold text-slate-900">Certificate Locked</h2>
+        <p class="text-sm text-slate-600 max-w-md mx-auto">
+          You must complete the 10-Question Certification Exam with a passing score of at least <strong>80% (8/10)</strong> to generate your verified certificate.
+        </p>
+        <button onclick="switchTab('tab-exam')" class="px-5 py-2.5 bg-[#8B0000] hover:bg-red-800 text-white font-bold rounded-lg text-sm shadow transition">
+          Take Assessment
+        </button>
+      </div>
+
+      <!-- Unlocked Certificate Section -->
+      <div id="cert-unlocked-box" class="hidden space-y-6">
+        
+        <!-- Controls Bar -->
+        <div class="bg-white p-4 rounded-xl border border-slate-300 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="w-full sm:w-auto">
+            <label for="student-name-input" class="block text-xs font-bold text-slate-700 uppercase mb-1">
+              Student Name (Type to update Certificate):
+            </label>
+            <input type="text" id="student-name-input" value="Jane Doe, Student MA" oninput="updateCertName(this.value)" class="border-2 border-slate-400 rounded-md px-3 py-1.5 text-sm font-semibold text-slate-900 w-full sm:w-80 focus:border-[#0056b3]">
+          </div>
+
+          <button onclick="printCert()" class="w-full sm:w-auto px-5 py-2.5 bg-[#b38600] hover:bg-amber-600 text-white font-bold rounded-lg shadow text-sm transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-print" aria-hidden="true"></i> Print / Save as PDF
+          </button>
+        </div>
+
+        <!-- The Printable Certificate (High visual contrast, elegant border) -->
+        <div class="flex justify-center p-2 sm:p-6 bg-slate-200 rounded-xl overflow-x-auto">
+          <div id="printable-certificate" class="bg-white w-[800px] h-[560px] p-8 border-8 border-double border-[#b38600] relative shadow-2xl flex flex-col justify-between text-center select-none">
+            
+            <!-- Certificate Header -->
+            <div class="space-y-1">
+              <p class="text-xs uppercase font-extrabold tracking-widest text-[#8B0000]">
+                Lamar Institute of Technology • Allied Health Department
+              </p>
+              <h3 class="font-certificate text-2xl sm:text-3xl font-extrabold text-[#0c1f38] uppercase tracking-wide">
+                Certificate of Clinical Competence
+              </h3>
+              <p class="text-xs text-slate-500 font-serif italic">This is to certify that</p>
+            </div>
+
+            <!-- Student Name -->
+            <div class="my-2">
+              <div id="cert-name-display" class="font-certificate text-2xl sm:text-3xl font-bold text-[#8B0000] border-b-2 border-[#b38600] pb-1.5 inline-block px-8">
+                Jane Doe, Student MA
+              </div>
+              <p class="text-xs text-slate-700 max-w-xl mx-auto mt-3 leading-relaxed">
+                has successfully completed laboratory instruction and demonstrated simulated practical mastery in <strong>CLIA-Waived Urinalysis, 10-Parameter Chemical Dipsticks, Quality Control Protocols, and Point-of-Care Urine Screenings</strong> meeting American Association of Medical Assistants (AAMA) clinical competencies.
+              </p>
+            </div>
+
+            <!-- Verification & Signatures -->
+            <div class="grid grid-cols-3 items-end pt-4 border-t border-slate-300 text-xs text-slate-800">
+              <div class="text-center">
+                <p class="font-bold" id="cert-date-display">November 2, 2026</p>
+                <div class="w-28 h-0.5 bg-slate-400 mx-auto my-1" aria-hidden="true"></div>
+                <span class="text-[10px] text-slate-500 uppercase tracking-wider block">Date Verified</span>
+              </div>
+
+              <!-- Seal Graphic -->
+              <div class="flex flex-col items-center">
+                <div class="w-16 h-16 rounded-full bg-[#0c1f38] border-2 border-amber-400 text-amber-300 flex items-center justify-center shadow">
+                  <div class="text-center">
+                    <i class="fa-solid fa-award text-xl" aria-hidden="true"></i>
+                    <span class="block text-[7px] font-bold font-certificate">VERIFIED</span>
+                  </div>
+                </div>
+                <span class="text-[9px] font-bold text-[#8B0000] mt-1">LIT MEDICAL ASSISTING</span>
+              </div>
+
+              <div class="text-center">
+                <p class="font-bold">Tamanna Assih, BSN, RN, CMA</p>
+                <div class="w-36 h-0.5 bg-slate-400 mx-auto my-1" aria-hidden="true"></div>
+                <span class="text-[10px] text-slate-500 uppercase tracking-wider block">Clinical Instructor / Program Director</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ACCESSIBLE FOOTER -->
+  <footer class="bg-[#0c1f38] text-slate-400 text-xs py-5 border-t border-slate-700 mt-auto" role="contentinfo">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+      <div>
+        <p class="font-semibold text-slate-200">Lamar Institute of Technology • Medical Assisting Program</p>
+        <p class="text-[11px] text-slate-400">Compliant with Section 508 and WCAG 2.1 AA Accessibility Guidelines.</p>
+      </div>
+      <div class="text-slate-300 flex items-center gap-4">
+        <span><i class="fa-solid fa-universal-access text-amber-300 mr-1" aria-hidden="true"></i> High Contrast Mode</span>
+        <span><i class="fa-solid fa-circle-check text-emerald-400 mr-1" aria-hidden="true"></i> AAMA / AMT Aligned</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIC (ACCESSIBLE AUDIO, SIMULATOR, QUIZ & CERTIFICATE) -->
+  <script>
+    /* =========================================================
+       1. WEB AUDIO API (Accessible Audio Cues)
+       ========================================================= */
+    let audioContext = null;
+    let audioOn = true;
+
+    function initAudio() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playAudio(freq = 600, duration = 0.1, type = 'sine') {
+      if (!audioOn) return;
+      try {
+        initAudio();
+        if (audioContext.state === 'suspended') {
+          audioContext.resume();
+        }
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioContext.currentTime);
+        gain.gain.setValueAtTime(0.08, audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioContext.destination);
+        osc.start();
+        osc.stop(audioContext.currentTime + duration);
+      } catch (e) {
+        console.warn("Audio unavailable", e);
+      }
+    }
+
+    function toggleAudio() {
+      audioOn = !audioOn;
+      const icon = document.getElementById('audio-icon');
+      const text = document.getElementById('audio-status-text');
+      if (audioOn) {
+        icon.className = "fa-solid fa-volume-high text-amber-300";
+        text.textContent = "Audio: ON";
+        announceSR("Audio assistance turned on");
+        playAudio(650, 0.1);
+      } else {
+        icon.className = "fa-solid fa-volume-xmark text-slate-400";
+        text.textContent = "Audio: OFF";
+        announceSR("Audio assistance turned off");
+      }
+    }
+
+    function announceSR(message) {
+      const el = document.getElementById('sr-announcements');
+      if (el) {
+        el.textContent = message;
+      }
+    }
+
+    /* =========================================================
+       2. TAB NAVIGATION (Full Keyboard & ARIA Sync)
+       ========================================================= */
+    function switchTab(tabId) {
+      playAudio(450, 0.05);
+      
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-link').forEach(btn => {
+        btn.setAttribute('aria-selected', 'false');
+        btn.classList.remove('bg-[#8B0000]', 'text-white', 'shadow', 'border-red-700');
+        btn.classList.add('text-slate-200');
+      });
+
+      const pane = document.getElementById(tabId);
+      if (pane) pane.classList.remove('hidden');
+
+      const activeBtn = document.getElementById('btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.setAttribute('aria-selected', 'true');
+        activeBtn.classList.remove('text-slate-200');
+        activeBtn.classList.add('bg-[#8B0000]', 'text-white', 'shadow', 'border-red-700');
+      }
+
+      announceSR("Navigated to " + activeBtn.textContent.trim());
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* =========================================================
+       3. VIRTUAL DIPSTICK SIMULATOR LOGIC
+       ========================================================= */
+    const labCases = {
+      'case-uti': {
+        cc: "34yo Female with acute dysuria, urgency, and pelvic pain for 2 days.",
+        color: "Cloudy Yellow",
+        clarity: "Cloudy / Turbid",
+        odor: "Foul / Ammonia",
+        urineHex: "#e3bf5b",
+        answers: {
+          glu: "Negative",
+          ket: "Negative",
+          sg: "1.025",
+          blo: "Trace",
+          pro: "Trace (15 mg)",
+          nit: "Positive",
+          leu: "Large"
+        },
+        pads: {
+          leu: "#6f4284", // Deep purple (Large WBCs)
+          nit: "#e6739f", // Pink (Positive)
+          uro: "#fde3ca",
+          pro: "#8fae6d", // Light green (Trace)
+          ph: "#336154",
+          blo: "#8fa838", // Speckled green (Trace)
+          sg: "#4d6b38",
+          ket: "#cfb59b",
+          bil: "#f2e6cb",
+          glu: "#84b5c7"
+        }
+      },
+      'case-dka': {
+        cc: "19yo Male with extreme thirst, polyuria, nausea, and sweet fruity breath odor.",
+        color: "Straw / Pale Yellow",
+        clarity: "Clear",
+        odor: "Fruity / Sweet",
+        urineHex: "#fff6bd",
+        answers: {
+          glu: "1000+ mg/dL",
+          ket: "Large (80+ mg)",
+          sg: "1.035+",
+          blo: "Negative",
+          pro: "Negative",
+          nit: "Negative",
+          leu: "Negative"
+        },
+        pads: {
+          leu: "#faf4db",
+          nit: "#ffffff",
+          uro: "#fde3ca",
+          pro: "#d8e8b2",
+          ph: "#e09033",
+          blo: "#d8af2c",
+          sg: "#997b2e",
+          ket: "#6a1f49", // Deep purple (Large Ketones)
+          bil: "#f2e6cb",
+          glu: "#4a2e24"  // Dark brown (1000+ Glucose)
+        }
+      },
+      'case-normal': {
+        cc: "28yo Female presenting for routine annual preventative wellness exam.",
+        color: "Straw / Pale Yellow",
+        clarity: "Clear",
+        odor: "Normal Aromatic",
+        urineHex: "#fcef97",
+        answers: {
+          glu: "Negative",
+          ket: "Negative",
+          sg: "1.015",
+          blo: "Negative",
+          pro: "Negative",
+          nit: "Negative",
+          leu: "Negative"
+        },
+        pads: {
+          leu: "#faf4db",
+          nit: "#ffffff",
+          uro: "#fde3ca",
+          pro: "#d8e8b2",
+          ph: "#d4a843",
+          blo: "#d8af2c",
+          sg: "#2b6d5e",
+          ket: "#cfb59b",
+          bil: "#f2e6cb",
+          glu: "#84b5c7"
+        }
+      },
+      'case-renal': {
+        cc: "56yo Male with sudden severe right flank pain radiating to groin; noticed pinkish urine.",
+        color: "Hazy Pink / Red",
+        clarity: "Hazy",
+        odor: "Normal Aromatic",
+        urineHex: "#e38888",
+        answers: {
+          glu: "Negative",
+          ket: "Negative",
+          sg: "1.025",
+          blo: "Large",
+          pro: "1+ (30 mg)",
+          nit: "Negative",
+          leu: "Negative"
+        },
+        pads: {
+          leu: "#faf4db",
+          nit: "#ffffff",
+          uro: "#fde3ca",
+          pro: "#8fae6d",
+          ph: "#d4a843",
+          blo: "#0a2f26", // Dark green (Large blood)
+          sg: "#4d6b38",
+          ket: "#cfb59b",
+          bil: "#f2e6cb",
+          glu: "#84b5c7"
+        }
+      }
+    };
+
+    let currentLabKey = 'case-uti';
+    let labInterval = null;
+    let labElapsed = 0;
+    let isDipped = false;
+    let isTapped = false;
+
+    function loadLabCase() {
+      currentLabKey = document.getElementById('lab-case-select').value;
+      const data = labCases[currentLabKey];
+
+      document.getElementById('case-cc').textContent = data.cc;
+      document.getElementById('case-color').textContent = data.color;
+      document.getElementById('case-clarity').textContent = data.clarity;
+      document.getElementById('case-odor').textContent = data.odor;
+      document.getElementById('urine-visual-fill').style.backgroundColor = data.urineHex;
+
+      announceSR("Loaded " + data.color + " specimen for evaluation.");
+      resetLab();
+    }
+
+    function executeDip() {
+      if (isDipped) return;
+      isDipped = true;
+      playAudio(400, 0.2);
+
+      const strip = document.getElementById('visual-strip');
+      strip.style.transform = "translateY(10px)";
+      
+      document.getElementById('lab-timer-announcer').textContent = "Dipped! Remove immediately.";
+      announceSR("Dipstick submerged. Now tap the edge horizontally on a paper towel.");
+
+      setTimeout(() => {
+        strip.style.transform = "none";
+        document.getElementById('btn-step-dip').disabled = true;
+        document.getElementById('btn-step-dip').classList.add('opacity-50', 'cursor-not-allowed');
+
+        const tapBtn = document.getElementById('btn-step-tap');
+        tapBtn.disabled = false;
+        tapBtn.classList.remove('bg-slate-700', 'text-slate-300', 'cursor-not-allowed');
+        tapBtn.classList.add('bg-amber-600', 'hover:bg-amber-700', 'text-white');
+      }, 500);
+    }
+
+    function executeTap() {
+      if (!isDipped || isTapped) return;
+      isTapped = true;
+      playAudio(500, 0.1);
+
+      const tapBtn = document.getElementById('btn-step-tap');
+      tapBtn.disabled = true;
+      tapBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+      document.getElementById('lab-timer-announcer').textContent = "Tapped! Timer running. Read pads at proper seconds.";
+      announceSR("Strip tapped. Timer started. Monitor 30, 40, 45, 60, and 120 second intervals.");
+
+      startLabTimer();
+    }
+
+    function startLabTimer() {
+      clearInterval(labInterval);
+      labElapsed = 0;
+      const targetPads = labCases[currentLabKey].pads;
+
+      labInterval = setInterval(() => {
+        labElapsed++;
+        const mins = String(Math.floor(labElapsed / 60)).padStart(2, '0');
+        const secs = String(labElapsed % 60).padStart(2, '0');
+        document.getElementById('lab-timer-display').textContent = `${mins}:${secs}`;
+
+        // Chemical color transitions
+        if (labElapsed === 30) {
+          playAudio(700, 0.1);
+          document.getElementById('pad-glu-box').style.backgroundColor = targetPads.glu;
+          document.getElementById('pad-bil-box').style.backgroundColor = targetPads.bil;
+          announceSR("30 seconds reached: Read Glucose and Bilirubin.");
+        }
+        if (labElapsed === 40) {
+          playAudio(700, 0.1);
+          document.getElementById('pad-ket-box').style.backgroundColor = targetPads.ket;
+          announceSR("40 seconds reached: Read Ketones.");
+        }
+        if (labElapsed === 45) {
+          document.getElementById('pad-sg-box').style.backgroundColor = targetPads.sg;
+        }
+        if (labElapsed === 60) {
+          playAudio(700, 0.15);
+          document.getElementById('pad-blo-box').style.backgroundColor = targetPads.blo;
+          document.getElementById('pad-ph-box').style.backgroundColor = targetPads.ph;
+          document.getElementById('pad-pro-box').style.backgroundColor = targetPads.pro;
+          document.getElementById('pad-uro-box').style.backgroundColor = targetPads.uro;
+          document.getElementById('pad-nit-box').style.backgroundColor = targetPads.nit;
+          announceSR("60 seconds reached: Read Blood, pH, Protein, Urobilinogen, and Nitrite.");
+        }
+        if (labElapsed >= 120) {
+          playAudio(880, 0.25);
+          document.getElementById('pad-leu-box').style.backgroundColor = targetPads.leu;
+          clearInterval(labInterval);
+          document.getElementById('lab-timer-announcer').textContent = "120s Complete: Read Leukocytes. Ready to chart!";
+          announceSR("120 seconds reached. All 10 parameters are fully developed and ready to document.");
+        }
+      }, 400); // Accelerated timer for class flow
+    }
+
+    function resetLab() {
+      clearInterval(labInterval);
+      labElapsed = 0;
+      isDipped = false;
+      isTapped = false;
+      document.getElementById('lab-timer-display').textContent = "00:00";
+      document.getElementById('lab-timer-announcer').textContent = "Ready to begin test";
+
+      const dipBtn = document.getElementById('btn-step-dip');
+      dipBtn.disabled = false;
+      dipBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+      const tapBtn = document.getElementById('btn-step-tap');
+      tapBtn.disabled = true;
+      tapBtn.className = "px-4 py-2.5 bg-slate-700 text-slate-300 rounded-md font-bold text-xs sm:text-sm shadow cursor-not-allowed flex items-center gap-2";
+
+      // Reset pad visuals
+      document.getElementById('pad-leu-box').style.backgroundColor = "#faf4db";
+      document.getElementById('pad-nit-box').style.backgroundColor = "#ffffff";
+      document.getElementById('pad-uro-box').style.backgroundColor = "#fde3ca";
+      document.getElementById('pad-pro-box').style.backgroundColor = "#d8e8b2";
+      document.getElementById('pad-ph-box').style.backgroundColor = "#d4a843";
+      document.getElementById('pad-blo-box').style.backgroundColor = "#d8af2c";
+      document.getElementById('pad-sg-box').style.backgroundColor = "#2b6d5e";
+      document.getElementById('pad-ket-box').style.backgroundColor = "#cfb59b";
+      document.getElementById('pad-bil-box').style.backgroundColor = "#f2e6cb";
+      document.getElementById('pad-glu-box').style.backgroundColor = "#84b5c7";
+
+      document.getElementById('lab-feedback-box').className = "hidden p-4 rounded-lg text-xs sm:text-sm";
+      document.getElementById('lab-chart-form').reset();
+    }
+
+    function validateLabReport(e) {
+      e.preventDefault();
+      if (!isTapped || labElapsed < 60) {
+        alert("Please complete the chemical timing steps before submitting the laboratory chart.");
+        return;
+      }
+
+      const correct = labCases[currentLabKey].answers;
+      const user = {
+        glu: document.getElementById('select-glu').value,
+        ket: document.getElementById('select-ket').value,
+        sg: document.getElementById('select-sg').value,
+        blo: document.getElementById('select-blo').value,
+        pro: document.getElementById('select-pro').value,
+        nit: document.getElementById('select-nit').value,
+        leu: document.getElementById('select-leu').value
+      };
+
+      let errors = [];
+      if (user.glu !== correct.glu) errors.push(`Glucose: expected "${correct.glu}"`);
+      if (user.ket !== correct.ket) errors.push(`Ketones: expected "${correct.ket}"`);
+      if (user.nit !== correct.nit) errors.push(`Nitrite: expected "${correct.nit}"`);
+      if (user.leu !== correct.leu) errors.push(`Leukocytes: expected "${correct.leu}"`);
+      if (user.blo !== correct.blo) errors.push(`Blood: expected "${correct.blo}"`);
+
+      const box = document.getElementById('lab-feedback-box');
+      box.classList.remove('hidden');
+
+      if (errors.length === 0) {
+        playAudio(880, 0.3);
+        box.className = "p-4 rounded-lg text-sm bg-emerald-50 text-emerald-950 border-2 border-emerald-400";
+        box.innerHTML = `
+          <strong class="font-bold flex items-center gap-1.5 text-emerald-900 text-base mb-1">
+            <i class="fa-solid fa-circle-check"></i> Accurate Documentation!
+          </strong>
+          <p>Your findings match the clinical case presentation perfectly. Chart verified and signed.</p>
+        `;
+        announceSR("Laboratory chart validated successfully with zero discrepancies.");
+      } else {
+        playAudio(250, 0.2, 'sawtooth');
+        box.className = "p-4 rounded-lg text-sm bg-red-50 text-red-950 border-2 border-red-300";
+        box.innerHTML = `
+          <strong class="font-bold flex items-center gap-1.5 text-red-900 text-base mb-1">
+            <i class="fa-solid fa-circle-exclamation"></i> Chart Discrepancy Found:
+          </strong>
+          <ul class="list-disc list-inside mt-1 space-y-0.5">
+            ${errors.map(err => `<li>${err}</li>`).join('')}
+          </ul>
+        `;
+        announceSR("Chart discrepancy found. Please review the parameter colors and correct your entries.");
+      }
+    }
+
+    /* =========================================================
+       4. POINT-OF-CARE hCG TOGGLES
+       ========================================================= */
+    function setHcgVisual(type) {
+      playAudio(550, 0.08);
+      const c = document.getElementById('hcg-control-bar');
+      const t = document.getElementById('hcg-test-bar');
+      const label = document.getElementById('hcg-status-label');
+
+      if (type === 'pos') {
+        c.style.opacity = '1';
+        t.style.opacity = '1';
+        label.textContent = "Positive (Pregnant)";
+        label.className = "font-bold text-sm text-pink-700";
+        announceSR("hCG Cassette displaying two lines: Positive.");
+      } else if (type === 'neg') {
+        c.style.opacity = '1';
+        t.style.opacity = '0';
+        label.textContent = "Negative (Not Pregnant)";
+        label.className = "font-bold text-sm text-slate-700";
+        announceSR("hCG Cassette displaying single control line: Negative.");
+      } else if (type === 'inv') {
+        c.style.opacity = '0';
+        t.style.opacity = '1';
+        label.textContent = "INVALID (Missing Control Line)";
+        label.className = "font-bold text-sm text-red-700";
+        announceSR("hCG Cassette missing control line: Invalid result. Retest required.");
+      }
+    }
+
+    /* =========================================================
+       5. AAMA CMA / RMA 10-QUESTION EXAM
+       ========================================================= */
+    const quizData = [
+      {
+        question: "1. What is the maximum acceptable time a urine specimen can sit at room temperature before testing or refrigerating?",
+        options: [
+          "15 minutes",
+          "1 hour",
+          "4 hours",
+          "24 hours"
+        ],
+        answer: 1,
+        rationale: "Urine must be tested within 1 hour of collection. Otherwise, bacteria multiply, urea splits into ammonia, and cells lyse."
+      },
+      {
+        question: "2. Which urine collection method is preferred when testing for a suspected UTI that may require a Culture and Sensitivity (C&S)?",
+        options: [
+          "Random uncleaned specimen",
+          "Clean-Catch Midstream (CCMS)",
+          "First morning void without towelettes",
+          "24-hour pooled specimen"
+        ],
+        answer: 1,
+        rationale: "Clean-catch midstream (CCMS) cleans the urethral opening and flushes out skin flora with the first void, collecting pure bladder urine."
+      },
+      {
+        question: "3. Immediately after dipping the Multistix reagent strip into the urine sample, what must the Medical Assistant do?",
+        options: [
+          "Shake the strip vigorously over the counter",
+          "Blot the pads firmly with sterile cotton",
+          "Tap the long edge of the strip horizontally on an absorbent paper towel",
+          "Place the strip vertically in the sink"
+        ],
+        answer: 2,
+        rationale: "Tapping horizontally removes excess urine, preventing chemical run-over and cross-contamination between adjacent pads."
+      },
+      {
+        question: "4. Which reagent pad on a 10-parameter test strip requires the LONGEST read time (a full 120 seconds / 2 minutes)?",
+        options: [
+          "Glucose",
+          "Nitrite",
+          "Leukocytes (WBCs)",
+          "Protein"
+        ],
+        answer: 2,
+        rationale: "Leukocyte esterase requires 120 seconds (2 minutes) to complete its enzyme reaction. Reading too early produces a false-negative."
+      },
+      {
+        question: "5. A positive result on both the Nitrite and Leukocyte Esterase pads in a cloudy urine specimen strongly indicates:",
+        options: [
+          "Diabetic ketoacidosis",
+          "Bacterial Urinary Tract Infection (UTI)",
+          "Acute hepatitis",
+          "Glomerulonephritis"
+        ],
+        answer: 1,
+        rationale: "Gram-negative bacteria (like E. coli) reduce nitrate to nitrite, and leukocytes release esterase during an active infection."
+      },
+      {
+        question: "6. What is the normal physiological range for urine Specific Gravity?",
+        options: [
+          "0.900 to 1.000",
+          "1.005 to 1.030",
+          "1.035 to 1.080",
+          "1.100 to 1.200"
+        ],
+        answer: 1,
+        rationale: "Normal specific gravity is 1.005 to 1.030. Readings below 1.005 indicate very dilute urine; above 1.030 indicates dehydration."
+      },
+      {
+        question: "7. When should a Medical Assistant run Level 1 and Level 2 Quality Control (QC) solutions on urinalysis dipsticks?",
+        options: [
+          "Only once per year during audits",
+          "Daily, whenever opening a new bottle lot, or when results are questioned",
+          "Only when a doctor specifically orders QC",
+          "Never, because CLIA-waived tests do not require QC"
+        ],
+        answer: 1,
+        rationale: "Daily Quality Control (running known positive and negative controls) ensures the chemical pads and technique remain accurate."
+      },
+      {
+        question: "8. A patient's urine dipstick shows large Ketones and marked Glucose. What condition is most likely suspected?",
+        options: [
+          "Diabetic Ketoacidosis (DKA)",
+          "Acute Cystitis",
+          "Biliary tract stone",
+          "Renal hypertension"
+        ],
+        answer: 0,
+        rationale: "When the body cannot utilize glucose due to lack of insulin, fat catabolism produces ketones, spilling both glucose and ketones into urine."
+      },
+      {
+        question: "9. During a workplace forensic Urine Drug Screen (UDS), within what timeframe must the MA check the specimen temperature strip?",
+        options: [
+          "Within 4 minutes (acceptable range: 90°F to 100°F / 32°C to 38°C)",
+          "Within 30 minutes",
+          "Within 1 hour",
+          "Temperature check is not required"
+        ],
+        answer: 0,
+        rationale: "Chain-of-custody protocols require checking the temperature within 4 minutes. A reading outside 90°F–100°F indicates tampering."
+      },
+      {
+        question: "10. In a rapid urine hCG pregnancy test cassette, a pink line appears at the 'Test' (T) area, but NO line appears at the 'Control' (C) area. How should this be interpreted?",
+        options: [
+          "Definite positive pregnancy",
+          "Definite negative pregnancy",
+          "Invalid test result; repeat test with a new cassette",
+          "Borderline result"
+        ],
+        answer: 2,
+        rationale: "The Control (C) line must always develop to verify reagent validity. If C is absent, the test is invalid regardless of the test band."
+      }
+    ];
+
+    let userAnswers = {};
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-questions-list');
+      if (!container) return;
+
+      container.innerHTML = quizData.map((q, qIdx) => `
+        <fieldset class="bg-slate-50 border border-slate-300 rounded-lg p-5 space-y-3" id="q-box-${qIdx}">
+          <legend class="font-bold text-sm sm:text-base text-slate-900 leading-snug">
+            ${q.question}
+          </legend>
+
+          <div class="space-y-2 pt-1 text-sm">
+            ${q.options.map((opt, optIdx) => `
+              <label class="flex items-center space-x-3 p-2.5 rounded border border-slate-300 hover:bg-slate-100 cursor-pointer bg-white">
+                <input type="radio" name="quiz-q-${qIdx}" value="${optIdx}" onchange="recordQuizAnswer(${qIdx}, ${optIdx})" class="w-4 h-4 text-[#8B0000] focus:ring-[#0056b3]">
+                <span class="text-slate-900 font-medium">${opt}</span>
+              </label>
+            `).join('')}
+          </div>
+
+          <div id="q-rationale-${qIdx}" class="hidden p-3 rounded text-xs sm:text-sm mt-2" aria-live="polite"></div>
+        </fieldset>
+      `).join('');
+    }
+
+    function recordQuizAnswer(qIdx, optIdx) {
+      playAudio(500, 0.04);
+      userAnswers[qIdx] = optIdx;
+      const count = Object.keys(userAnswers).length;
+      document.getElementById('quiz-score-num').textContent = `${count} / 10 Answered`;
+    }
+
+    function gradeQuiz(e) {
+      e.preventDefault();
+      let correctCount = 0;
+
+      quizData.forEach((q, idx) => {
+        const rationaleEl = document.getElementById(`q-rationale-${idx}`);
+        const fieldsetEl = document.getElementById(`q-box-${idx}`);
+        const isCorrect = userAnswers[idx] === q.answer;
+
+        rationaleEl.classList.remove('hidden');
+
+        if (isCorrect) {
+          correctCount++;
+          fieldsetEl.className = "bg-emerald-50 border-2 border-emerald-400 rounded-lg p-5 space-y-3";
+          rationaleEl.className = "p-3 rounded text-xs sm:text-sm bg-emerald-100 text-emerald-950 font-medium";
+          rationaleEl.innerHTML = `<strong>Correct:</strong> ${q.rationale}`;
+        } else {
+          fieldsetEl.className = "bg-red-50 border-2 border-red-300 rounded-lg p-5 space-y-3";
+          rationaleEl.className = "p-3 rounded text-xs sm:text-sm bg-red-100 text-red-950 font-medium";
+          rationaleEl.innerHTML = `<strong>Incorrect.</strong> ${q.rationale}`;
+        }
+      });
+
+      const percentage = Math.round((correctCount / quizData.length) * 100);
+      const passed = percentage >= 80;
+
+      document.getElementById('quiz-score-num').textContent = `${correctCount} / 10 (${percentage}%)`;
+      document.getElementById('header-score-badge').textContent = `${percentage}% (${correctCount}/10)`;
+
+      const banner = document.getElementById('quiz-results-banner');
+      banner.classList.remove('hidden');
+
+      if (passed) {
+        playAudio(880, 0.4);
+        banner.className = "p-6 rounded-xl border-2 border-emerald-400 bg-emerald-50 text-emerald-950 space-y-2";
+        banner.innerHTML = `
+          <h3 class="font-extrabold text-lg text-emerald-900 flex items-center gap-2">
+            <i class="fa-solid fa-circle-check"></i> Examination Passed: ${percentage}% (${correctCount}/10)
+          </h3>
+          <p class="text-sm">Congratulations! You met the 80% competency benchmark for the AAMA/RMA examination standard. Your Certificate of Completion is now unlocked.</p>
+          <button onclick="switchTab('tab-certificate')" class="mt-2 px-5 py-2.5 bg-[#8B0000] hover:bg-red-800 text-white font-bold rounded shadow text-sm">
+            View & Print Certificate
+          </button>
+        `;
+        unlockCert();
+        announceSR(`Exam graded: Passed with ${percentage} percent.`);
+      } else {
+        playAudio(260, 0.3, 'sawtooth');
+        banner.className = "p-6 rounded-xl border-2 border-red-400 bg-red-50 text-red-950 space-y-2";
+        banner.innerHTML = `
+          <h3 class="font-extrabold text-lg text-red-900 flex items-center gap-2">
+            <i class="fa-solid fa-circle-xmark"></i> Score: ${percentage}% (${correctCount}/10)
+          </h3>
+          <p class="text-sm">An 80% passing grade (8 of 10) is required to unlock certification. Review the rationales above and retry.</p>
+        `;
+        announceSR(`Exam graded: ${percentage} percent. 80 percent required to pass.`);
+      }
+
+      window.scrollTo({ top: banner.offsetTop - 50, behavior: 'smooth' });
+    }
+
+    function resetQuiz() {
+      userAnswers = {};
+      document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+      document.getElementById('quiz-score-num').textContent = "0 / 10";
+      document.getElementById('quiz-results-banner').classList.add('hidden');
+      renderQuiz();
+      announceSR("Quiz reset.");
+    }
+
+    /* =========================================================
+       6. CERTIFICATE UNLOCKING & PRINTING
+       ========================================================= */
+    function unlockCert() {
+      document.getElementById('cert-locked-box').classList.add('hidden');
+      document.getElementById('cert-unlocked-box').classList.remove('hidden');
+    }
+
+    function updateCertName(name) {
+      document.getElementById('cert-name-display').textContent = name.trim() || "Student Medical Assistant";
+    }
+
+    function printCert() {
+      playAudio(650, 0.15);
+      window.print();
+    }
+
+    /* Set current formatted system date */
+    function setSystemDate() {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const today = new Date().toLocaleDateString('en-US', options);
+      const el = document.getElementById('cert-date-display');
+      if (el) el.textContent = today;
+    }
+
+    /* Initialize upon window load */
+    window.onload = function() {
+      loadLabCase();
+      renderQuiz();
+      setSystemDate();
+    };
+  </script>
+</body>
+</html>
